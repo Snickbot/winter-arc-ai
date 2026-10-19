@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f0e8">
+  <title>Winter Arc AI | Your 90-Day Reset</title>
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --card: #fffdf8;
+      --text: #22251f;
+      --muted: #77776d;
+      --orange: #c45b36;
+      --border: #e6dfd4;
+      --green: #dfe8d8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(100% - 32px, 760px);
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo { font-weight: 900; letter-spacing: 1px; }
+    .logo span { color: var(--orange); }
+
+    .tag {
+      font-size: 10px;
+      font-weight: bold;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .hero { padding: 52px 0 34px; }
+
+    .eyebrow {
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 9vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -2px;
+      margin: 15px 0;
+    }
+
+    h1 em {
+      color: var(--orange);
+      font-family: Georgia, serif;
+      font-weight: normal;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 480px;
+      font-size: 15px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .progress-heading, .progress-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .progress-heading strong { color: var(--orange); }
+
+    .track {
+      height: 8px;
+      background: #ebe5db;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 15px 0 9px;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      background: var(--orange);
+      transition: width .3s;
+    }
+
+    .progress-bottom { color: var(--muted); }
+
+    section { padding: 22px 0; }
+
+    h2 {
+      font-size: 27px;
+      margin: 5px 0;
+      letter-spacing: -.6px;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      margin: 9px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      cursor: pointer;
+    }
+
+    .task input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .task span { font-size: 14px; font-weight: bold; }
+
+    .task.done { background: #eff3eb; }
+    .task.done span {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    button {
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .secondary {
+      background: transparent;
+      border: 0;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+
+    .primary {
+      background: var(--text);
+      color: white;
+      border: 0;
+      border-radius: 30px;
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .primary:disabled { opacity: .6; }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 15px 0;
+    }
+
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: 9px 12px;
+      font-size: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 105px;
+      resize: vertical;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      font: inherit;
+      font-size: 14px;
+      outline-color: var(--orange);
+    }
+
+    .coach-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .answer {
+      white-space: pre-wrap;
+      background: var(--green);
+      padding: 17px;
+      margin-top: 15px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+
+    .quote {
+      background: #252922;
+      color: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+
+    .quote p {
+      font: 24px/1.4 Georgia, serif;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 22px 0 30px;
+      color: var(--muted);
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .tasks { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }
+      .hero { padding-top: 70px; }
+    }
+
+    @media (max-width: 400px) {
+      .tag { font-size: 8px; }
+      .card { padding: 17px; }
+      .coach-actions { align-items: flex-end; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">WINTER ARC <span>AI</span></div>
+      <div class="tag">YOUR 90-DAY RESET</div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="eyebrow">SMALL STEPS. REAL CHANGE.</div>
+        <h1>Become who<br><em>you said you'd be.</em></h1>
+        <p class="intro">
+          Build discipline without chasing perfection.
+          Your next small step matters more than yesterday's mistakes.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="progress-heading">
+          <span>YOUR JOURNEY</span>
+          <strong id="dayLabel">DAY 1 OF 90</strong>
+        </div>
+        <div class="track"><div class="fill" id="progress"></div></div>
+        <div class="progress-bottom">
+          <span id="daysLeft">90 days to grow</span>
+          <span id="percent">1% started</span>
+        </div>
+      </div>
+
+      <section>
+        <div class="eyebrow">TODAY, NOT FOREVER</div>
+        <h2>Daily reset</h2>
+        <p class="muted">Check off the actions you complete. Your progress saves on this device.</p>
+
+        <div class="tasks" id="tasks"></div>
+
+        <p class="muted" id="taskCount">0 of 5 completed</p>
+        <button class="secondary" id="reset">↺ Reset today's checklist</button>
+      </section>
+
+      <section>
+        <div class="eyebrow">YOUR PERSONAL GUIDE</div>
+        <h2>Ask your coach ✳</h2>
+        <p class="muted">
+          Need help with studying, habits, focus, sleep, safe fitness,
+          or getting back on track? Start here.
+        </p>
+
+        <div class="chips">
+          <button class="chip" data-question="Help me plan a realistic day.">Plan my day</button>
+          <button class="chip" data-question="I missed yesterday. Help me restart.">Help me restart</button>
+          <button class="chip" data-question="Teach me how to study using active recall.">Study smarter</button>
+        </div>
+
+        <textarea id="question" placeholder="What do you want help with?"></textarea>
+
+        <div class="coach-actions">
+          <span class="muted">One practical step at a time.</span>
+          <button class="primary" id="ask">Ask coach ↗</button>
+        </div>
+
+        <p class="muted" id="status" role="status"></p>
+        <div class="answer" id="answer" hidden></div>
+      </section>
+
+      <div class="quote">
+        <div class="eyebrow">THE WINTER ARC PRINCIPLE</div>
+        <p>You don't need a perfect day. You need a next step you can actually take.</p>
+      </div>
+    </main>
+
+    <footer>
+      <strong>WINTER ARC AI</strong>
+      <span>Progress over perfection · v0.1</span>
+    </footer>
+  </div>
+
+  <script>
+    const KEY = "winter-arc-ai-progress-v1";
+
+    const habits = [
+      { id: "study", text: "Complete one focused study session" },
+      { id: "move", text: "Move your body safely" },
+      { id: "sleep", text: "Protect tonight's sleep" },
+      { id: "goal", text: "Make progress on a personal goal" },
+      { id: "reflect", text: "Take two minutes to reflect or reset" }
+    ];
+
+    function load() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY)) || {
+          day: 1,
+          checks: {}
+        };
+      } catch {
+        return { day: 1, checks: {} };
+      }
+    }
+
+    let state = load();
+
+    function save() {
+      localStorage.setItem(KEY, JSON.stringify(state));
+    }
+
+    function todayKey() {
+      const d = new Date();
+      return d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0");
+    }
+
+    function render() {
+      const today = todayKey();
+      const list = document.getElementById("tasks");
+      list.innerHTML = "";
+
+      habits.forEach(habit => {
+        const checked = Boolean(state.checks[today]?.[habit.id]);
+        const label = document.createElement("label");
+        label.className = "task" + (checked ? " done" : "");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = checked;
+
+        checkbox.addEventListener("change", () => {
+          state.checks[today] = state.checks[today] || {};
+          state.checks[today][habit.id] = checkbox.checked;
+          save();
+          render();
+        });
+
+        const text = document.createElement("span");
+        text.textContent = habit.text;
+
+        label.append(checkbox, text);
+        list.appendChild(label);
+      });
+
+      const count = habits.filter(h => state.checks[today]?.[h.id]).length;
+      document.getElementById("taskCount").textContent =
+        count + " of " + habits.length + " completed";
+
+      const day = Math.max(1, Math.min(90, Number(state.day) || 1));
+      const percent = Math.round(day / 90 * 100);
+
+      document.getElementById("dayLabel").textContent =
+        "DAY " + day + " OF 90";
+      document.getElementById("progress").style.width = percent + "%";
+      document.getElementById("daysLeft").textContent =
+        (90 - day) + " days to grow";
+      document.getElementById("percent").textContent =
+        percent + "% of journey";
+    }
+
+    document.getElementById("reset").addEventListener("click", () => {
+      delete state.checks[todayKey()];
+      save();
+      render();
+    });
+
+    document.querySelectorAll("[data-question]").forEach(button => {
+      button.addEventListener("click", () => {
+        document.getElementById("question").value = button.dataset.question;
+        document.getElementById("question").focus();
+      });
+    });
+
+    document.getElementById("ask").addEventListener("click", async () => {
+      const question = document.getElementById("question").value.trim();
+      const status = document.getElementById("status");
+      const answer = document.getElementById("answer");
+      const button = document.getElementById("ask");
+
+      if (!question) {
+        status.textContent = "Write a question first, or choose a suggested prompt.";
+        return;
+      }
+
+      button.disabled = true;
+      status.textContent = "Looking for your next practical step...";
+      answer.hidden = true;
+
+      try {
+        const response = await fetch("/api/coach", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            question,
+            day: state.day,
+            completed: habits
+              .filter(h => state.checks[todayKey()]?.[h.id])
+              .map(h => h.text)
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Coach is not configured yet.");
+
+        answer.textContent = data.answer;
+        status.textContent = "Your coach's response:";
+      } catch {
+        answer.textContent =
+          "Let's start small.\\n\\n" +
+          "1. Choose one goal that matters today.\\n" +
+          "2. Break it into a task you can begin in five minutes.\\n" +
+          "3. Decide when you will do it.\\n" +
+          "4. If you miss a day, restart without punishing yourself.\\n\\n" +
+          "The AI connection isn't set up yet. Your checklist works now; " +
+          "we'll connect Gemini through Cloudflare in a later step.";
+        status.textContent = "Showing your starter coaching plan.";
+      } finally {
+        answer.hidden = false;
+        button.disabled = false;
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
